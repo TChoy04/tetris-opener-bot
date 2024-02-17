@@ -19,7 +19,6 @@
 - ~~Tetrio support~~
 - maybe jstris support in the future.
 - ~~Openers planned: sdp c-spin, unsure if anything else has high % build chance.~~
-- First three bags planned
 - Current Bags Done: 
     - First ✔
     - Second ✔
