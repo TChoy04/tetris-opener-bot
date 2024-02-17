@@ -14,6 +14,8 @@ FIRST_Z = False
 FIRST_I = False
 DELAYED_RED = False
 SECOND_BAG = {"O":False,"S":False,"L":False,"J":False,"Z":False,"I":False}
+THIRD_BAG = {"O":False,"S":False,"L":False,"J":False,"Z":False,"I":False}
+O_BEFORE_L = False
 def press_left():
     pyautogui.press("left")
     time.sleep(random.random()*0.005)
@@ -195,15 +197,30 @@ def second_bag():
     except:
         pass
 def second_T_Drop():
-    press_up()
-    press_down()
-    press_up()
-    press_space()
+    try:
+        if pyautogui.locateOnScreen('../images/T.png', region=(825, 70, 300, 100), confidence=0.7) != None:
+            press_up()
+            press_down()
+            press_up()
+            press_space()
+            return 0
+    except:
+        press_c()
+        second_T_Drop()
+
 
 def third_bag():
+    global THIRD_BAG
+    global O_BEFORE_L
+    try:
+        if pyautogui.locateOnScreen('../images/T.png', region=(825, 70, 300, 100), confidence=0.7) != None:
+            press_c()
+            return 0
+    except:
+        pass
     try:
         if pyautogui.locateOnScreen('../images/I.png', region=(825, 70, 300, 100), confidence=0.7) != None:
-
+            THIRD_BAG["I"] = True
             press_z()
             for _ in range(5):
                 press_right()
@@ -213,6 +230,7 @@ def third_bag():
         pass
     try:
         if pyautogui.locateOnScreen('../images/L.png', region=(825, 70, 300, 100), confidence=0.7) != None:
+            THIRD_BAG["L"] = True
             press_z()
             press_space()
             return 0
@@ -220,6 +238,7 @@ def third_bag():
         pass
     try:
         if pyautogui.locateOnScreen('../images/J.png', region=(825, 70, 300, 100), confidence=0.7) != None:
+            THIRD_BAG["J"] = True
             press_up()
             press_right()
             press_space()
@@ -228,7 +247,7 @@ def third_bag():
         pass
     try:
         if pyautogui.locateOnScreen('../images/S.png', region=(825, 70, 300, 100), confidence=0.7) != None:
-            SECOND_BAG["Z"] = True
+            THIRD_BAG["S"] = True
             press_z()
             for _ in range(4):
                 press_right()
@@ -236,17 +255,88 @@ def third_bag():
             return 0
     except:
         pass
+    try:
+        if pyautogui.locateOnScreen('../images/O.png', region=(825, 70, 300, 100), confidence=0.7) != None:
+            THIRD_BAG["O"] = True
+            if(THIRD_BAG["L"]==True):
+                press_left()
+                press_space()
+            else:
+                for _ in range(3):
+                    O_BEFORE_L = True
+                    press_left()
+                press_space()
+    except:
+        pass
+    try:
+        if pyautogui.locateOnScreen('../images/Z.png', region=(825, 70, 300, 100), confidence=0.7) != None:
+            THIRD_BAG["Z"] = True
+            if(O_BEFORE_L == False):
+                for _ in range(3):
+                    press_left()
+                press_space()
+            else:
+                press_z()
+                for _ in range(3):
+                    press_left()
+                press_space()
+            return 0
+    except:
+        pass
+
+def third_T_Drop():
+    global O_BEFORE_L
+    try:
+        if pyautogui.locateOnScreen('../images/T.png', region=(825, 70, 300, 100), confidence=0.7) != None:
+            if O_BEFORE_L:
+                press_down()
+                press_right()
+                press_right()
+                press_z()
+                press_space()
+                return 0
+            else:
+                press_up()
+                press_right()
+                press_down()
+                press_z()
+                press_z()
+                press_space()
+                try:
+                    if pyautogui.locateOnScreen('../images/HoldT.png', confidence=0.95) != None:
+                        press_c()
+                        press_z()
+                        press_right()
+                        press_right()
+                        press_down()
+                        press_z()
+                        press_space()
+                except:
+                    pass
+                try:
+                    if pyautogui.locateOnScreen('../images/T.png', region=(825, 70, 300, 100), confidence=0.7) != None:
+                        press_z()
+                        press_right()
+                        press_right()
+                        press_down()
+                        press_z()
+                        press_space()
+                except:
+                    pass
+    except:
+        press_c()
+        third_T_Drop()
 def main():
     global FIRST_I, FIRST_J, FIRST_L, FIRST_Z, FIRST_S, FIRST_O
-    time.sleep(3)
     while FIRST_I!= True or FIRST_J != True or FIRST_L != True or FIRST_Z != True or FIRST_S != True or FIRST_O != True:
         first_bag()
     first_T_Drop()
     while SECOND_BAG["O"]!= True or SECOND_BAG["J"] != True or SECOND_BAG["L"] != True or SECOND_BAG["Z"] != True or SECOND_BAG["S"] != True or SECOND_BAG["I"] != True:
         second_bag()
     second_T_Drop()
-    while 1:
+    while THIRD_BAG["O"]!= True or THIRD_BAG["J"] != True or THIRD_BAG["L"] != True or THIRD_BAG["Z"] != True or THIRD_BAG["S"] != True or THIRD_BAG["I"] != True:
         third_bag()
+    third_T_Drop()
 
 
 if __name__ == "__main__":
