@@ -265,6 +265,8 @@ def third_bag():
                 for _ in range(3):
                     O_BEFORE_L = True
                     press_left()
+                if(THIRD_BAG["Z"]):
+                    press_left()
                 press_space()
     except:
         pass
