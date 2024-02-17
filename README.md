@@ -1,9 +1,12 @@
 # tetris-opener-bot
 
 # SETUP
+- Must be on **1920x1080** monitor, full-screen.
 - Z or T piece must come before O
 - Completely black background image, I used "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/A_black_background.jpg/640px-A_black_background.jpg"
-- 
+- Run script
+- Run in singleplayer/other modes
+- Script will start running once then first image is recognized.
 
 
 
