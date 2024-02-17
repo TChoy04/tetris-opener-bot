@@ -9,72 +9,65 @@ import pydirectinput
 
 def press_left():
     pyautogui.press("left")
-    time.sleep(random.random()*0.1)
+    time.sleep(random.random()*0.05)
 
 def press_up():
     pyautogui.press("up")
-    time.sleep(random.random()*0.12)
+    time.sleep(random.random()*0.1)
 def press_right():
     pyautogui.press("right")
-    time.sleep(random.random()*0.18)
+    time.sleep(random.random()*0.08)
 
 def press_space():
     pyautogui.press("space")
-    time.sleep(random.random()*0.15)
+    time.sleep(random.random() * 0.1)
 
 def press_down():
-    pyautogui.press("down")
-    time.sleep(random.random() * 0.17)
+    pyautogui.keyDown("down")
+    time.sleep(random.random() * 0.5)
+    pyautogui.keyUp("down")
+    time.sleep(random.random() * 0.2)
 
-FIRST_MOVE = True
-def check_first_move(first_move):
-    if(first_move == True):
-        FIRST_MOVE = False
-        pyautogui.press("c")
-    else:
-        press_space()
 def first_bag():
     try:
-        if pyautogui.locateOnScreen('../images/T.png', confidence=0.95) != None:
-            check_first_move(FIRST_MOVE)
-            for _ in range(5):
-                press_left()
+        if pyautogui.locateOnScreen('../images/I.png',region=(875,70,200,100), confidence=0.7) != None:
+            press_up()
+            for _ in range(6):
+                press_right()
+            press_space()
+            time.sleep(0.5)
+            return 0
     except:
-        print("a")
+        pass
     try:
-        if pyautogui.locateOnScreen('../images/O.png',confidence=0.95) != None:
-            check_first_move(FIRST_MOVE)
+        if pyautogui.locateOnScreen('../images/O.png', region=(875, 70, 200, 100), confidence=0.7) != None:
             for _ in range(5):
                 press_left()
+            press_space()
+            time.sleep(0.5)
+            return 0
     except:
-        try:
-            if pyautogui.locateOnScreen('../images/L.png', confidence=0.95) != None:
-                check_first_move(FIRST_MOVE)
-                press_right()
-                press_up()
-                press_down()
-                press_up()
-                press_right()
-        except:
-            try:
-                if pyautogui.locateOnScreen('../images/I.png', confidence=0.95) != None:
-                    check_first_move(FIRST_MOVE)
-                    press_up()
-                    for _ in range(6):
-                        press_right()
+        pass
+    try:
+        if pyautogui.locateOnScreen('../images/L.png', region=(875, 70, 200, 100), confidence=0.8) != None:
+            print("L found")
+            press_up()
+            press_down()
+            press_right()
+            press_down()
+            press_up()
+            press_right()
+            press_right()
+            press_space()
+            time.sleep(0.5)
+            return 0
+    except:
+        pass
 
-            except:
-                print("a")
-
-
-    return 0
 def main():
-    # time.sleep(3)
-    # for _ in range(8):
-    #     first_bag()
-    #     time.sleep(0.5)
-    time.sleep(5)
-    pyautogui.screenshot('full_screen.png')
+    while 1:
+        time.sleep(0.5)
+        first_bag()
 
 if __name__ == "__main__":
     main()
