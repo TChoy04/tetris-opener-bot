@@ -58,6 +58,7 @@ def first_bag():
             FIRST_S = True
             press_left()
             press_space()
+            return 0
     except:
         pass
     try:
@@ -98,7 +99,7 @@ def first_bag():
     except:
         pass
     try:
-        if pyautogui.locateOnScreen('../images/Z.png', region=(825, 70, 300, 100), confidence=0.7) != None or DELAYED_RED == True:
+        if pyautogui.locateOnScreen('../images/Z.png', region=(825, 70, 300, 100), confidence=0.7) != None or (DELAYED_RED == True and FIRST_O):
             if(FIRST_O != True):
                 print("O not down yet!")
                 DELAYED_RED = True
@@ -120,12 +121,20 @@ def first_bag():
     except:
         pass
 
-
+def first_T_Drop():
+    press_c()
+    press_up()
+    press_left()
+    press_left()
+    press_down()
+    press_up()
+    press_space()
 def main():
     global FIRST_I, FIRST_J, FIRST_L, FIRST_Z, FIRST_S, FIRST_O
     time.sleep(3)
     while FIRST_I!=True or FIRST_J!=True or FIRST_L!=True or FIRST_Z!=True or FIRST_S!=True or FIRST_O!=True:
-       first_bag()
+        first_bag()
+    first_T_Drop()
 
 
 
