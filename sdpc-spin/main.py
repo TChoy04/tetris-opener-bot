@@ -12,10 +12,12 @@ def main():
         try:
             if pyautogui.locateOnScreen('../images/T.png')!=None:
                 print("hello")
-                time.sleep(2)
+                pyautogui.press("z")
+                time.sleep(1)
+
         except:
             print("bye")
-            time.sleep(2)
+            time.sleep(1)
 
 if __name__ == "__main__":
     main()
