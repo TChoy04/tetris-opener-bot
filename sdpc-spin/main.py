@@ -6,9 +6,12 @@ import random
 import random
 import win32api, win32con
 import pydirectinput
-
 FIRST_O = False
 FIRST_S = False
+FIRST_L = False
+FIRST_J = False
+FIRST_Z = False
+FIRST_I = False
 DELAYED_RED = False
 def press_left():
     pyautogui.press("left")
@@ -38,9 +41,10 @@ def press_c():
     time.sleep(random.random() * 0.06)
 
 def first_bag():
+    global FIRST_I, FIRST_J, FIRST_L, FIRST_Z, FIRST_S, FIRST_O, DELAYED_RED
     try:
         if pyautogui.locateOnScreen('../images/I.png',region=(825,70,300,100), confidence=0.7) != None:
-
+            FIRST_I = True
             press_up()
             for _ in range(6):
                 press_right()
@@ -50,9 +54,7 @@ def first_bag():
     except:
         pass
     try:
-        if pyautogui.locateOnScreen('../images/s.png', region=(825, 70, 300, 100), confidence=0.8) != None:
-
-            global FIRST_S
+        if pyautogui.locateOnScreen('../images/s.png', region=(825, 70, 300, 100), confidence=0.7) != None:
             FIRST_S = True
             press_left()
             press_space()
@@ -60,7 +62,6 @@ def first_bag():
         pass
     try:
         if pyautogui.locateOnScreen('../images/O.png', region=(825, 70, 300, 100), confidence=0.7) != None:
-            global FIRST_O
             FIRST_O = True
 
             for _ in range(5):
@@ -72,6 +73,7 @@ def first_bag():
         pass
     try:
         if pyautogui.locateOnScreen('../images/J.png', region=(825, 70, 300, 100), confidence=0.8) != None:
+            FIRST_J = True
             press_up()
             press_down()
             press_right()
@@ -86,6 +88,7 @@ def first_bag():
         pass
     try:
         if pyautogui.locateOnScreen('../images/L.png', region=(825, 70, 300, 100), confidence=0.8) != None:
+            FIRST_L = True
             press_z()
             for _ in range(6):
                 press_right()
@@ -95,11 +98,13 @@ def first_bag():
     except:
         pass
     try:
-        if pyautogui.locateOnScreen('../images/Z.png', region=(825, 70, 300, 100), confidence=0.7) != None:
+        if pyautogui.locateOnScreen('../images/Z.png', region=(825, 70, 300, 100), confidence=0.7) != None or DELAYED_RED == True:
             if(FIRST_O != True):
                 print("O not down yet!")
+                DELAYED_RED = True
                 press_c()
                 return 0
+            FIRST_Z = True
             press_z()
             for _ in range(5):
                 press_left()
@@ -107,13 +112,21 @@ def first_bag():
             time.sleep(0.5)
             return 0
     except:
-
+        pass
+    try:
+        if pyautogui.locateOnScreen('../images/T.png', region=(825, 70, 300, 100), confidence=0.7) != None:
+            press_c()
+            return 0
+    except:
         pass
 
 
 def main():
-    while 1:
-        first_bag()
+    global FIRST_I, FIRST_J, FIRST_L, FIRST_Z, FIRST_S, FIRST_O
+    time.sleep(3)
+    while FIRST_I!=True or FIRST_J!=True or FIRST_L!=True or FIRST_Z!=True or FIRST_S!=True or FIRST_O!=True:
+       first_bag()
+
 
 
 if __name__ == "__main__":
