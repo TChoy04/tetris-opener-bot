@@ -1,5 +1,6 @@
 # tetris-opener-bot
-
+https://www.youtube.com/watch?v=eCFk3LBXPTk
+https://youtu.be/eCFk3LBXPTk
 # SETUP
 - Must be on **1920x1080** monitor, full-screen.
 - Z or T piece must come before O
