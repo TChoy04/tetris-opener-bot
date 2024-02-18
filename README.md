@@ -1,4 +1,5 @@
 # tetris-opener-bot
+# Tech Demo - Click to view
 [![Tech Demo!](https://img.youtube.com/vi/eCFk3LBXPTk/maxresdefault.jpg)](https://youtu.be/eCFk3LBXPTk)
 # SETUP
 - Must be on **1920x1080** monitor, full-screen.
